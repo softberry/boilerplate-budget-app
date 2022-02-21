@@ -69,18 +69,18 @@ def create_spend_chart(categories):
 
     for i in range(0,max_len):
         line=""
-        eol="\n"
+        eol=" \n"
 
         for n in x_labels:
             line+=" " + n[i:i+1] + " "
             if i + 1 == max_len:
-                eol=""
+                eol=" "
         vertical_Labels+="    " + line + eol
     
     def vis_percent(yVal,val):
         if(yVal<= (val - (val%10))):
             return "o"  
-        return ""
+        return " "
     
     
     all_total = sum(list(map(lambda x:x.total_spent,categories)))
@@ -88,7 +88,7 @@ def create_spend_chart(categories):
     
     for i,p in enumerate(y_axis):
         vals = "  ".join(list(map(lambda x:vis_percent(p,x.total_spent / all_total * 100),categories)))
-        
-        result += str(p).rjust(3," ") + "| " + vals + "\n"
+        vals_len=len(str(vals))
+        result += str(p).rjust(3," ") + "| " +  vals + "  \n"
 
     return result + "    ----------\n" +  vertical_Labels
